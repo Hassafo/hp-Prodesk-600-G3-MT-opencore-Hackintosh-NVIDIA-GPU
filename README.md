@@ -5,16 +5,17 @@ WITH NVIDIA dGPU ACCELERATION
 
 #### Features:
 
-- native CPU and iGPU Power management
+- Native CPU and iGPU Power management
 - Metal acceleration for Nvidia GT 730 dGPU
-- Dual GPU configuration, Intel HD 530 for video decoding and Nvidia GT 730 for display
-- Displayport at iGPU & dGPU
+- Dual GPU configuration,
+Intel HD 530 for video decoding and Nvidia GT 730 for display
+- Displayport works fpr iGPU & dGPU
 - USB Ports
 - Speakers & Audio Output (backside)
 - Displayport Audio
 - Sleep and Wake
 - Ethernet
-- SATA drive supported
+- SATA drive support
 - SIP is disabled in config.pl
 - VGA not tested
 
