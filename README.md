@@ -1,126 +1,58 @@
-# MacOS ThinkPad T440/T440s
+# Hackintosh hp Prodesk 600 G3 MT Opencore
 
-MacOS Mojave,Catalina,BigSur beta 9  on ThinkPad T440/T440s
+### Opencore 0.9.2 - macOS Monterey 12.6.6
+WITH NVIDIA dGPU ACCELERATION
 
-## Pre-Installation
+#### Features:
 
-### 1. Warning: check you BIOS version
-
-**You should update(downgrade) BIOS to v2.36 or MOD BIOS to remove Wireless Whitelist if you want use Another Wifi card!**
-
-### 2. BIOS settings
-
-| Item | Setting |
-| ------------- | ------------ |
-| Security Chip | Disabled |
-| Memory Protection Execution Prevention | Enabled |
-| Virtualization | Enabled |
-| Fingerprint Reader | Disabled |
-| Secure Boot | Disabled |
-| UEFI/Legacy Boot | UEFI Only |
-| CSM Support | YES |
-| Boot Mode | Quick |
-
-
-### 3. Specs
-
-| Specifications      | Detail                                      |
-| ------------------- | ------------------------------------------- |
-| Processor           | Intel Core i5-4300U                         |
-| Memory              | Samsung DDR3L 8GB Bus 1600MHz               |
-| Hard Disk           | Samsung SSD P851                            |
-| Integrated Graphics | Intel HD Graphics 4400                      |
-| Monitor             | FHD IPS 1920x1080                           |
-| Sound Card          | Realtek ALC292                              |
-| Wireless            | Intel Dual Band Wireless-AC 7260 (Replace to BCM94360CS2   |
-
-### 4. Current Status
-
-#### What will work
-
-- Intel HD 4400 Graphics QE/CI
+- native CPU and iGPU Power management
+- Metal acceleration for Nvidia GT 730 dGPU
+- Dual GPU configuration, Intel HD 530 for video decoding and Nvidia GT 730 for display
+- Displayport at iGPU & dGPU
 - USB Ports
-- Intel Ethernet
-- Audio (All Inputs & Outputs with combojack)
+- Speakers & Audio Output (backside)
+- Displayport Audio
 - Sleep and Wake
-- Mini DisplayPort and Mini DisplayPort Audio
-- CPU and IGPU Power Management
-- Battery Status
-- Brightness
-- Function Keys (Fn)
-- ClickPad and TrackPad
-- Integrated Camera
-- Wireless (Intel) work with itlwm (enable in config)
+- Ethernet
+- SATA drive supported
+- SIP is disabled in config.pl
+- VGA not tested
 
-#### Not working
+#### Not working yet:
 
-- Fingerprint Reader
-- VGA ()
+- Native power management for Nvidia GT 730
+- Writing NVRAM (blocked with boot-arg `rtcfx_exclude=00-FF`). 
 
-### 5. Wireless
 
-Inbuilt Intel Wi-Fi now can work with [OpenIntelWireless](https://github.com/OpenIntelWireless).
+### 2. Specs
 
-But I still suggestions using the apple wifi card (with adapter) for smoother operation.
+* Chipset Q270
+* Intel i5-6500
+* HD 530 iGPU
+* Nvidia GT 730 2GB
+* SATA SSD
+* SMBIOS: iMac 17,1 (same CPU and also dual-GPU machine) 
 
-I sell wifi card so please contact me if you need (only ship in Vietnam)
 
-## Installation
 
-### 1. BootLoader
-- OpenCore 0.6.2
+## IMPORTANT FOR INSTALLATION:
 
-### 2. Kexts used
 
-- [AppleALC.kext](https://github.com/acidanthera/AppleALC)
-- [CodecCommander.kext](https://github.com/Sniki/EAPD-Codec-Commander)
-- [IntelMausi.kext](https://github.com/acidanthera/IntelMausi)
-- [Lilu.kext](https://github.com/acidanthera/Lilu)
-- [Sinetek-rtsx.kext](https://github.com/cholonam/Sinetek-rtsx)
-- SMCBatteryManager.kext
-- SMCLightSensor.kext
-- SMCProcessor.kext
-- USBPorts.kext
-- [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC)
-- [VoodooPS2Controller.kext](https://github.com/acidanthera/VoodooPS2) (use latest version)
-- [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen)
+**My EFI folder contains two *config* files. The ***config_intel.plist*** is for installation and the other one for getting dual gpu configuration.
+First, rename ***config.plist*** to `config_intel.plist` for installation and booting, having your monitor connected to the iGPU and BIOS set to use the Intel iGPU.
+Then follow this: **
 
-### 3. Tool
+###  NVIDIA GPU PATCHING (Post-install)
+1. Get [KeplerPatcher](https://github.com/chris1111/Geforce-Kepler-patcher/releases/tag/V7)	
+2. Open it and follow the instructions. SIP should already be disabled by the config.plist.
+3. Reboot
+4. Use the `config_nvidia.plist` now (rename it to `config.plist`) and shutdown.
+5. Switch your DP cable to the port of the Nvidia GPU
+6. Boot
+7. You now have full acceleration on the Nvidia GPU!
 
-- Hackintool
-- ALCPluginFix to fix issue combojack
-- [ThinkpadAssistant](https://github.com/MSzturc/ThinkpadAssistant/releases) to use full function key.
-- GenSMBIOS to generate new System Info
+Don't forget to set your own platform info.
 
-## Post Install
-- 
-- Download [ALCPluginFix](https://github.com/Sniki/ALCPlugFix)
-- Extracted *ALCPlugFix* folder into Desktop.
-- Open *Terminal* and enter the following commands 1by1:
 
-```
-    sudo spctl --master-disable
-    sudo mkdir /usr/local/bin/
-    cd desktop/ALCPlugFix
-    ./install.sh
-```
 
-- Added *-rtsx_mimic-linux* <b>boot-arg</b> to fix SD Card Detection and initialization after wake from sleep.
 
-- Add MAC address of Builtin Ethernet to Config.plist > PlatformInfo > Generic > ROM.
-
-- Replace platform info (use genSMBIOS) Model MacBookPro11,1
-
-## Known Issues:
-
-- Docking Station Audio Jack has no input support, only output because we can't use two inputs as LineIn.
-- SD Card Reader after wake from sleep can't eject normally, you have to Force Eject.
-- Kernel Panic into an Instant Reboot when attempting sleep, restart or Shutdown while External Display connected on one of the Docking Station Video Ports (DisplayPort, DVI, VGA)
-- No DisplayPort Audio when using the Docking Station DisplayPort
-
-## Thanks to
-
-- @MSzturc
-- @Sniki
-- @acidanthera and OpenCore Team
-- All
