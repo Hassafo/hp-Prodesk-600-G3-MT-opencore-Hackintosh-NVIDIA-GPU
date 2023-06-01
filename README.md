@@ -1,7 +1,18 @@
-# Hackintosh hp Prodesk 600 G3 MT Opencore
+# hp Prodesk 600 G3 MT Hackintosh with Opencore 0.9.2
 
-### Opencore 0.9.2 - macOS Monterey 12.6.6
+### OC ver. 0.9.2 - macOS Monterey 12.6.6
 WITH NVIDIA dGPU ACCELERATION
+
+### Specs
+
+* Chipset Q270
+* CPU: Intel i5-6500
+* iGPU: HD 530
+* dGPU: Nvidia GT 730 2GB
+* SATA SSD
+* SMBIOS: iMac 17,1 (same CPU and also dual-GPU machine) 
+* If you want to use Ventura, use iMac18,1. 
+
 
 #### Features:
 
@@ -9,30 +20,25 @@ WITH NVIDIA dGPU ACCELERATION
 - Metal acceleration for Nvidia GT 730 dGPU
 - Dual GPU configuration,
 Intel HD 530 for video decoding and Nvidia GT 730 for display
-- Displayport works fpr iGPU & dGPU
+- Displayport works for iGPU & dGPU
 - USB Ports
 - Speakers & Audio Output (backside)
 - Displayport Audio
 - Sleep and Wake
 - Ethernet
 - SATA drive support
-- SIP is disabled in config.pl
+- SIP is disabled in config.plist
+- 
 - VGA not tested
 
 #### Not working yet:
 
-- Native power management for Nvidia GT 730
-- Writing NVRAM (blocked with boot-arg `rtcfx_exclude=00-FF`). 
+- The frontside Audio Out (for headphones) und the Audio In on the backside don't work. I have only tried Alcid=28 so far with AppleALC (apple native audio). 
+- Native power management for Nvidia GT 730. I tried with [this](https://elitemacx86.com/threads/how-to-enable-discrete-gpu-power-management-nvidia-amd.657/) guide, using [AGPMInjector Kext](https://github.com/Pavo-IM/AGPMInjector), but could nit get the `Heuristic-ID` of `04 00 00 00`, so I removed the Kext from the EFI. Feel free to try!
+
+- Writing NVRAM (blocked with boot-arg `rtcfx_exclude=00-FF`): NVRAM is a big issue with this machine. Something with Opencore or macOS doesn't get along with the board's RTC-clock thing. After every boot with Opencore, you get `POST ERROR: Real-time clock power loss (005)`. Only SSDT-AWAC and the `rtcfx_exclude=00-FF` boot-arg can solve this. The boot-arg blocks any inteferance with the sectors, so NVRAM-dependent things like disabling SIP don't work. That is why I disabled it in the Config.plist. There is a possibility to look for the "bad" sectors with `rtcfx_exclude=XX-XX`, but I did not need it anyway. 
 
 
-### 2. Specs
-
-* Chipset Q270
-* Intel i5-6500
-* HD 530 iGPU
-* Nvidia GT 730 2GB
-* SATA SSD
-* SMBIOS: iMac 17,1 (same CPU and also dual-GPU machine) 
 
 
 
@@ -51,6 +57,8 @@ Then follow this: **
 5. Switch your DP cable to the port of the Nvidia GPU
 6. Boot
 7. You now have full acceleration on the Nvidia GPU!
+
+Any help for solving those few problems is welcome as well as my help for those struggling with this machine. 
 
 Don't forget to set your own platform info.
 
