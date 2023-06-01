@@ -42,21 +42,34 @@ Intel HD 530 for video decoding and Nvidia GT 730 for display
 
 
 
-## IMPORTANT FOR INSTALLATION:
+## IMPORTANT FOR INSTALLATION
 
+### Pre-install:
 
-**My EFI folder contains two *config* files. The ***config_intel.plist*** is for installation and the other one for getting dual gpu configuration.
-First, rename ***config.plist*** to `config_intel.plist` for installation and booting, having your monitor connected to the iGPU and BIOS set to use the Intel iGPU.
-Then follow this: **
+My EFI folder contains two *config* files. The `config_intel.plist` is only for installation and setup and the other one `config_nvidia.plist` is later for permanent use, enabling the Nvidia dGPU to be used after Kepler patching.
+
+First, rename `config_intel.plist` to `config.plist`. Connect your monitor to the iGPU and set the BIOS to use the Intel iGPU. 
+**BIOS Settings**:
+- Intel Sodtware Extension Guard SGX: Disable
+- Secure Boot Configuration: Legacy Support Disable and Secure Boot disable. 
+- Intel Vtd: disabled
+- Intel VTx: enabled
+- VGA Boot Device: Intel VGA Controller
+- Video memory size: 64 MB or more
+
+Then follow the installation as in the opencore guide. Then, when you have macOS working:
 
 ###  NVIDIA GPU PATCHING (Post-install)
 1. Get [KeplerPatcher](https://github.com/chris1111/Geforce-Kepler-patcher/releases/tag/V7)	
 2. Open it and follow the instructions. SIP should already be disabled by the config.plist.
 3. Reboot
-4. Use the `config_nvidia.plist` now (rename it to `config.plist`) and shutdown.
-5. Switch your DP cable to the port of the Nvidia GPU
-6. Boot
-7. You now have full acceleration on the Nvidia GPU!
+4. Switch the config.plist with the `config_nvidia.plist` by renaming the former. 
+5. Power off. 
+6. Go to BIOS and set VGA boot device to NVIDIA VGA Controller. Switch your monitor cable now to the port of the Nvidia GPU. 
+
+ 
+7. Boot
+8. You now have full acceleration on the Nvidia GPU!
 
 Any help for solving those few problems is welcome as well as my help for those struggling with this machine. 
 
