@@ -3,9 +3,9 @@
 ### OC ver. 0.9.2 - macOS Monterey 12.6.6
 WITH NVIDIA dGPU ACCELERATION
 
-![](https://drive.google.com/file/d/1fEJo2wIRsblkrmMK0KRcDEiBG9acaNey/view?usp=sharing)
+![](https://raw.githubusercontent.com/Hassafo/hp-Prodesk-600-G3-MT-opencore-Hackintosh/e58c3633a844947180995978023dda9449e4e494/Bildschirmfoto%202023-06-01%20um%2022.33.46.png))
 
-![](https://drive.google.com/file/d/1Kve3kJRlzLYXbXnV0sfTECGhoy04nk91/view?usp=sharing)
+![](https://raw.githubusercontent.com/Hassafo/hp-Prodesk-600-G3-MT-opencore-Hackintosh/e58c3633a844947180995978023dda9449e4e494/Bildschirmfoto%202023-06-01%20um%2022.35.10.png)
 
 ### Specs
 
